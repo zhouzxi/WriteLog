@@ -16,7 +16,7 @@
 typedef struct
 {
     unsigned char  szEmployeeName[128];    // 员工姓名
-    int    iEmployeeAge;           // 员工年龄
+    int            iEmployeeAge;           // 员工年龄
 } T_EmployeeInfo;
 
 // 函数声明
@@ -35,40 +35,40 @@ void GetEmployeeInfo();
 ***********************************************************************/
 int main()
 {
-	unsigned char  szLogContent[1024] = {0};
+    unsigned char  szLogContent[1024] = {0};
 
-	 // 获取配置文件中各个配置项的值
-	GetConfigValue();
+    // 获取配置文件中各个配置项的值
+    GetConfigValue();
 	
-	// 先打印版本相关信息
-	snprintf(szLogContent, sizeof(szLogContent)-1, "Version [1.0], Build time[%s %s].", __DATE__, __TIME__);
+    // 先打印版本相关信息
+    snprintf(szLogContent, sizeof(szLogContent)-1, "Version [1.0], Build time[%s %s].", __DATE__, __TIME__);
     WRITELOGFILE(LOG_INFO, szLogContent);
 
-	// 打印第一条日志
-	snprintf(szLogContent, sizeof(szLogContent)-1, "The Fatal log info!");
+    // 打印第一条日志
+    snprintf(szLogContent, sizeof(szLogContent)-1, "The Fatal log info!");
     WRITELOGFILE(LOG_FATAL, szLogContent);
 
     // 打印第二条日志
-	snprintf(szLogContent, sizeof(szLogContent)-1, "The Error log info!");
-	WRITELOGFILE(LOG_ERROR, szLogContent);
+    snprintf(szLogContent, sizeof(szLogContent)-1, "The Error log info!");
+    WRITELOGFILE(LOG_ERROR, szLogContent);
 	
-	// 打印第三条日志
-	snprintf(szLogContent, sizeof(szLogContent)-1, "The Warn log info!");
-	WRITELOGFILE(LOG_WARN, szLogContent);
-
-	// 打印第四条日志
-	snprintf(szLogContent, sizeof(szLogContent)-1, "The Info log info!");
-	WRITELOGFILE(LOG_INFO, szLogContent);
+    // 打印第三条日志
+    snprintf(szLogContent, sizeof(szLogContent)-1, "The Warn log info!");
+    WRITELOGFILE(LOG_WARN, szLogContent);
+ 
+    // 打印第四条日志
+    snprintf(szLogContent, sizeof(szLogContent)-1, "The Info log info!");
+    WRITELOGFILE(LOG_INFO, szLogContent);
 	
-	// 打印第五条日志
-	snprintf(szLogContent, sizeof(szLogContent)-1, "The Trace log info!");
-	WRITELOGFILE(LOG_TRACE, szLogContent);
+    // 打印第五条日志
+    snprintf(szLogContent, sizeof(szLogContent)-1, "The Trace log info!");
+    WRITELOGFILE(LOG_TRACE, szLogContent);
 	
-	// 打印第六条日志
-	snprintf(szLogContent, sizeof(szLogContent)-1, "The Debug log info!");
-	WRITELOGFILE(LOG_DEBUG, szLogContent);
+    // 打印第六条日志
+    snprintf(szLogContent, sizeof(szLogContent)-1, "The Debug log info!");
+    WRITELOGFILE(LOG_DEBUG, szLogContent);
 	
-	GetEmployeeInfo();   // 获取并打印员工信息
+    GetEmployeeInfo();   // 获取并打印员工信息
 	
     return 0; 
 }
@@ -90,20 +90,20 @@ void GetEmployeeInfo()
 	
     T_EmployeeInfo tEmployeeInfo = {0};
     
-	// 获取并打印员工信息
-	// 获取员工姓名
-	GetConfigFileStringValue("EMPLOYEEINFO", "EmployeeName", "", tEmployeeInfo.szEmployeeName, sizeof(tEmployeeInfo.szEmployeeName), "Config.ini");
+    // 获取并打印员工信息
+    // 获取员工姓名
+    GetConfigFileStringValue("EMPLOYEEINFO", "EmployeeName", "", tEmployeeInfo.szEmployeeName, sizeof(tEmployeeInfo.szEmployeeName), "Config.ini");
 	
-	// 获取员工年龄
-	tEmployeeInfo.iEmployeeAge = GetConfigFileIntValue("EMPLOYEEINFO", "EmployeeAge", 0, "Config.ini");
-	if (tEmployeeInfo.iEmployeeAge == -1)  // 判断获取到的年龄是否正确
-	{
-	    snprintf(szLogContent, sizeof(szLogContent)-1, "GetEmployeeInfo: Get EmployeeAge failed!");
-	    WRITELOGFILE(LOG_ERROR, szLogContent);
-		return;
-	}
+    // 获取员工年龄
+    tEmployeeInfo.iEmployeeAge = GetConfigFileIntValue("EMPLOYEEINFO", "EmployeeAge", 0, "Config.ini");
+    if (tEmployeeInfo.iEmployeeAge == -1)  // 判断获取到的年龄是否正确
+    {
+	snprintf(szLogContent, sizeof(szLogContent)-1, "GetEmployeeInfo: Get EmployeeAge failed!");
+	WRITELOGFILE(LOG_ERROR, szLogContent);
+	return;
+    }
 	
-	// 打印读取到的员工姓名和年龄
-	snprintf(szLogContent, sizeof(szLogContent)-1, "EmployeeName is %s, EmployeeAge is %d", tEmployeeInfo.szEmployeeName, tEmployeeInfo.iEmployeeAge);
-	WRITELOGFILE(LOG_INFO, szLogContent);
+    // 打印读取到的员工姓名和年龄
+    snprintf(szLogContent, sizeof(szLogContent)-1, "EmployeeName is %s, EmployeeAge is %d", tEmployeeInfo.szEmployeeName, tEmployeeInfo.iEmployeeAge);
+    WRITELOGFILE(LOG_INFO, szLogContent);
 }
